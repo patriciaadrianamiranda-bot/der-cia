@@ -1,0 +1,22 @@
+name: Verificações do repositório
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  tamanho-arquivos:
+    name: Arquivos de no máximo 20 KB
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv run scripts/verificar_tamanho.py
+
+  scripts-pep723:
+    name: Scripts em Python com PEP 723
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv run scripts/verificar_pep723.py
